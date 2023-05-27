@@ -6,8 +6,10 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D playerRb;
+    public Animator animator;
     [SerializeField]
     private float moveSpeed;
+    private bool isWalk;
     private bool isLookLeft; // true = olhando para a esqueda, false = olhando para a direita
 
 
@@ -22,14 +24,18 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Vector2 moveDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        playerRb.velocity = moveDirection.normalized * moveSpeed;
 
-        if(moveDirection.x  > 0 && isLookLeft == true) {
+        isWalk = moveDirection.sqrMagnitude != 0;
+
+        if (moveDirection.x  > 0 && isLookLeft == true) {
             Flip();
         } else if (moveDirection.x < 0 && isLookLeft == false) {
             Flip();
         }
 
+        playerRb.velocity = moveDirection.normalized * moveSpeed;
+
+        animator.SetBool("isWalk", isWalk);
 
     }
 
