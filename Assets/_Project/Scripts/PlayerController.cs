@@ -5,10 +5,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    private HeroData hero;
     private Rigidbody2D playerRb;
-    public Animator animator;
-    [SerializeField]
-    private float moveSpeed;
+    private Animator animator;
     private bool isWalk;
     private bool isLookLeft; // true = olhando para a esqueda, false = olhando para a direita
 
@@ -17,7 +16,10 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         playerRb = GetComponent<Rigidbody2D>();
+        hero = Core.Instance.gameManager.selectedHero;
 
+        GameObject myHero = Instantiate(hero.prefab, this.transform);
+        animator = myHero.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -33,7 +35,7 @@ public class PlayerController : MonoBehaviour
             Flip();
         }
 
-        playerRb.velocity = moveDirection.normalized * moveSpeed;
+        playerRb.velocity = moveDirection.normalized * hero.moveSpeed;
 
         animator.SetBool("isWalk", isWalk);
 
