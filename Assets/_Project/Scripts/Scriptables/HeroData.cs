@@ -5,4 +5,6 @@ public class HeroData : ScriptableObject
 {
     public GameObject prefab;
     public float moveSpeed;
+
+    public WeaponData startingWeapon;
 }

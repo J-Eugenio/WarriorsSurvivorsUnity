@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
 
         GameObject myHero = Instantiate(hero.prefab, this.transform);
         animator = myHero.GetComponent<Animator>();
+
+        Instantiate(hero.startingWeapon.prefab, this.transform);
     }
 
     // Update is called once per frame
@@ -39,6 +41,10 @@ public class PlayerController : MonoBehaviour
 
         animator.SetBool("isWalk", isWalk);
 
+    }
+
+    public bool GetIsLookLeft() {
+        return isLookLeft;
     }
 
     void Flip() {
