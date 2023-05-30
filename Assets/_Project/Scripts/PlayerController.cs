@@ -10,10 +10,10 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     private bool isWalk;
     private bool isLookLeft; // true = olhando para a esqueda, false = olhando para a direita
-
+    private Vector2 moveDirection;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         playerRb = GetComponent<Rigidbody2D>();
         hero = Core.Instance.gameManager.selectedHero;
@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector2 moveDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        moveDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
         isWalk = moveDirection.sqrMagnitude != 0;
 
@@ -45,6 +45,10 @@ public class PlayerController : MonoBehaviour
 
     public bool GetIsLookLeft() {
         return isLookLeft;
+    }
+
+    public Vector2 GetMoveDirection() {
+        return moveDirection;
     }
 
     void Flip() {

@@ -283,6 +283,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectedHero: {fileID: 11400000, guid: 5f8f24af104bc31468302a0b4f46d023, type: 2}
+  player: {fileID: 1447901990}
 --- !u!4 &1117242440
 Transform:
   m_ObjectHideFlags: 0
