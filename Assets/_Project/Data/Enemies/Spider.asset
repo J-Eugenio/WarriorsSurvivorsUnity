@@ -12,3 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b8fff3d344aa0b4f9d6e16101ab46a6, type: 3}
   m_Name: Spider
   m_EditorClassIdentifier: 
+  enemyName: Spider
+  enemyPortrait: {fileID: 21300000, guid: 2d328919a0d180a4d95fb02301f293f1, type: 3}
+  prefab: {fileID: 2759089057212196126, guid: 22202a4220fa1394ba82b609d15d3a1a, type: 3}
+  targetUpdateDelay: 1.5
+  moveSpeed: 1.5
+  maxHealth: 5
+  damage: 3
+  xp: 20
+  knockBackWeakness: -2
+  timeBetweenAttacks: 1

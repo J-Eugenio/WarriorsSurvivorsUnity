@@ -5,6 +5,19 @@ public class HeroData : ScriptableObject
 {
     public GameObject prefab;
     public float moveSpeed;
-
+    public float maxHealth;
     public WeaponData startingWeapon;
+
+    public HeroPowerUpBonus[] abilities;
+
+    public float GetHeroPowerUpBonus(PowerUpData powerUp) {
+        float bonus = 0;
+
+        foreach(var ability in abilities) {
+            if(ability.powerUp == powerUp) {
+                bonus = ability.value;
+            }
+        }
+        return bonus;
+    }
 }

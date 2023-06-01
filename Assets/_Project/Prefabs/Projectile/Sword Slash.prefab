@@ -121,7 +121,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: c019550b29107f942a9f6d9207392fde, type: 2}
-  lifeTime: 0.3
+  might: {fileID: 11400000, guid: 08545bbbb0afefb49a9b515aed30413b, type: 2}
+  lifeTime: 0.2
   isTemporary: 1
 --- !u!61 &5206009311176556799
 BoxCollider2D:
@@ -136,7 +137,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.48676908, y: -0.04956253}
+  m_Offset: {x: 0.15510601, y: -0.049562514}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -147,5 +148,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.9252825, y: 0.889801}
+  m_Size: {x: 2.5886083, y: 0.889801}
   m_EdgeRadius: 0

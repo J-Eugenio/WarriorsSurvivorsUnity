@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: Spiked Ball
   m_EditorClassIdentifier: 
   prefab: {fileID: 1350809947402492638, guid: d27ff11676be1d84e97757e478de96c8, type: 3}
+  damage: 10
+  knockBack: 0.4

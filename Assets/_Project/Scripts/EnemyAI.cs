@@ -12,7 +12,7 @@ public class EnemyAI : MonoBehaviour, IDamageable
 
     private float currentHealth;
     private float knockBackTime;
-    private int knockBackFactor = 1;
+    private float knockBackFactor = 1;
 
     public GameObject hitArea;
 
@@ -20,13 +20,27 @@ public class EnemyAI : MonoBehaviour, IDamageable
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         StartCoroutine(nameof(IETargetUpdate));
-
+        StartCoroutine(nameof(IEAttack));
         currentHealth = enemyData.maxHealth;
+
+        hitArea.GetComponent<MobHitArea>().data = enemyData;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(knockBackTime > 0) {
+            knockBackFactor = enemyData.knockBackWeakness;
+            knockBackTime -= Time.deltaTime;
+        } else {
+            knockBackFactor = 1;
+        }
+
+        if(moveDirection.x > 0 && isLookLeft == true) {
+            Flip();
+        }else if (moveDirection.x < 0 && isLookLeft == false) { 
+            Flip(); 
+        }
         _rigidbody.velocity = moveDirection.normalized * enemyData.moveSpeed * knockBackFactor;
     }
 
@@ -38,10 +52,26 @@ public class EnemyAI : MonoBehaviour, IDamageable
         }
     }
 
+    IEnumerator IEAttack() {
+        while (true) {
+            hitArea.SetActive(false);
+            yield return new WaitForSeconds(enemyData.timeBetweenAttacks);
+            hitArea.SetActive(true);
+            yield return new WaitForSeconds(0.3f);
+        }
+    }
+
     public void TakeDamage(float value, float knockBack) {
         currentHealth -= value;
+        knockBackTime = knockBack;
         if(currentHealth <= 0) {
             Destroy(this.gameObject);
         }
+    }
+
+    void Flip() {
+        isLookLeft = !isLookLeft;
+        float x = transform.localScale.x * -1;
+        transform.localScale = new Vector3(x, transform.localScale.y, transform.localScale.z);
     }
 }

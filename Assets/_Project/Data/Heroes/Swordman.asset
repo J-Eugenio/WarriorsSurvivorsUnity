@@ -14,4 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 6976829728826495378, guid: e1c5220286fc3844ab0417a83021ff57, type: 3}
   moveSpeed: 1.8
-  startingWeapon: {fileID: 11400000, guid: 384e67aeae32b4c4a9220e2a08c266cb, type: 2}
+  maxHealth: 100
+  startingWeapon: {fileID: 11400000, guid: c019550b29107f942a9f6d9207392fde, type: 2}
+  abilities:
+  - powerUp: {fileID: 11400000, guid: 08545bbbb0afefb49a9b515aed30413b, type: 2}
+    value: 15
+  - powerUp: {fileID: 11400000, guid: f7bb29103cea83047a20016877be99e7, type: 2}
+    value: 15

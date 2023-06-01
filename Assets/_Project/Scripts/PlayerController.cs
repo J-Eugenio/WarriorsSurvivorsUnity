@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class PlayerController : MonoBehaviour
     private bool isWalk;
     private bool isLookLeft; // true = olhando para a esqueda, false = olhando para a direita
     private Vector2 moveDirection;
+
+    public PowerUpData moveSpeed;
 
     // Start is called before the first frame update
     void Awake()
@@ -37,7 +40,7 @@ public class PlayerController : MonoBehaviour
             Flip();
         }
 
-        playerRb.velocity = moveDirection.normalized * hero.moveSpeed;
+        playerRb.velocity = moveDirection.normalized * CalculateMoveSpeed();
 
         animator.SetBool("isWalk", isWalk);
 
@@ -55,5 +58,20 @@ public class PlayerController : MonoBehaviour
         isLookLeft = !isLookLeft;
         float x = transform.localScale.x * -1;
         transform.localScale = new Vector3(x, transform.localScale.y, transform.localScale.z);
+    }
+
+    private float CalculateMoveSpeed() {
+        float bonus = Core.Instance.upgradeManager.GetPowerUpBonus(moveSpeed);
+        float moveBase = hero.moveSpeed;
+        switch (moveSpeed.bonusType) {
+            case Unit.Sum:
+                moveBase = moveBase + bonus;
+                break;
+            case Unit.Percentage:
+                moveBase = moveBase + moveBase * (bonus / 100);
+                break;
+        }
+
+        return moveBase;
     }
 }

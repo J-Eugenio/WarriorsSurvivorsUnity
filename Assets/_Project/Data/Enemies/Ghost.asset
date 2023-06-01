@@ -12,3 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b8fff3d344aa0b4f9d6e16101ab46a6, type: 3}
   m_Name: Ghost
   m_EditorClassIdentifier: 
+  enemyName: Ghost
+  enemyPortrait: {fileID: 21300000, guid: 9c0f87549b0866540a9e2421d7b6646f, type: 3}
+  prefab: {fileID: 7589073190819708584, guid: e7ee884353f8e2e41a99ebd074572c11, type: 3}
+  targetUpdateDelay: 1
+  moveSpeed: 1.8
+  maxHealth: 10
+  damage: 8
+  xp: 18
+  knockBackWeakness: -0.5
+  timeBetweenAttacks: 0.5
