@@ -16,8 +16,10 @@ public class PlayerController : MonoBehaviour
     public PowerUpData moveSpeed;
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
+        Core.Instance.gameManager.PlayerRegister(this.transform);
+
         playerRb = GetComponent<Rigidbody2D>();
         hero = Core.Instance.gameManager.selectedHero;
 
@@ -73,5 +75,15 @@ public class PlayerController : MonoBehaviour
         }
 
         return moveBase;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision) {
+        switch(collision.gameObject.tag) {
+            case "Item":
+                ItemCollectible item = collision.gameObject.GetComponent<ItemCollectible>();
+                Core.Instance.gameManager.GetItemCollectible(item);
+                Destroy(collision.gameObject);
+                break;
+        }
     }
 }

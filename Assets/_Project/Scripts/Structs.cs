@@ -16,4 +16,14 @@ public struct HeroPowerUpBonus {
     public float value;
 }
 
+[Serializable]
+public struct EnemiesAmount {
+    public EnemyData enemy;
+    public int amount;
+}
 
+[Serializable]
+public struct WaveController {
+    public EnemiesAmount[] enemies;
+    public float intervalBetweenEnemies;
+}

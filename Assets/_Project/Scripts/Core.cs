@@ -6,6 +6,8 @@ public class Core : MonoBehaviour
 
     public GameManager gameManager;
     public UpgradesManager upgradeManager;
+    [HideInInspector]
+    public WaveManager waveManager;
 
     private void Awake() {
         if(Instance != null && Instance != this) {

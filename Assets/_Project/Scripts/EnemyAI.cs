@@ -24,6 +24,9 @@ public class EnemyAI : MonoBehaviour, IDamageable
         currentHealth = enemyData.maxHealth;
 
         hitArea.GetComponent<MobHitArea>().data = enemyData;
+        target = Core.Instance.gameManager.player.position;
+        moveDirection = target - transform.position;
+
     }
 
     // Update is called once per frame
@@ -65,6 +68,10 @@ public class EnemyAI : MonoBehaviour, IDamageable
         currentHealth -= value;
         knockBackTime = knockBack;
         if(currentHealth <= 0) {
+            GameObject xp = Instantiate(enemyData.xpBallPrefab);
+            xp.GetComponent<ItemCollectible>().SetValue(enemyData.xp);
+            xp.transform.position = transform.position;
+            Core.Instance.waveManager.EnemyUnregister(enemyData);
             Destroy(this.gameObject);
         }
     }
