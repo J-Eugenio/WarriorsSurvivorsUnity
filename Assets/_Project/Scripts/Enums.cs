@@ -15,6 +15,6 @@ public enum CollectibleType {
 }
 
 public enum GameState {
-    Gameplay,
-    Upgrade
+    GAMEPLAY,
+    UPGRADE
 }

@@ -11,12 +11,16 @@ public class WaveManager : MonoBehaviour
     public int maxEnemiesInScene = 100;
     private List<EnemyData> enemiesInScene = new List<EnemyData>();
 
+    private int seconds;
+    public int minutes;
+
     private Dictionary<EnemyData, int> enemyTypeAmount = new Dictionary<EnemyData, int>();
 
     void Start()
     {
         Core.Instance.waveManager = this;
         StartCoroutine(nameof(IESpawn));
+        StartCoroutine(nameof(IEGameTime));
     }
 
     private void LateUpdate() {
@@ -45,7 +49,7 @@ public class WaveManager : MonoBehaviour
 
     IEnumerator IESpawn() {
         WaveController wave = waves[idWave];
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(0.3f);
 
         while (true) {
             yield return new WaitUntil(() => enemiesInScene.Count < maxEnemiesInScene);
@@ -67,11 +71,33 @@ public class WaveManager : MonoBehaviour
         }
     }
 
+    IEnumerator IEGameTime() {
+        while(true) {
+            yield return new WaitForSeconds(1);
+            seconds += 1;
+            if(seconds == 10) {
+                seconds = 0;
+                minutes += 1;
+                NextWave();
+            }
+
+            Core.Instance.gpHubManager.UpdateGamePlayTime(minutes, seconds);
+        }
+    }
     private void NewMob(EnemyData data) {
         EnemyRegister(data);
         GameObject mob = Instantiate(data.prefab);
 
         int idSpawnPoint = Random.Range(0, spawnPoints.Length);
         mob.transform.position = spawnPoints[idSpawnPoint].position;
+    }
+
+    private void NextWave() {
+        idWave += 1;
+        if(idWave < waves.Length) {
+            StopCoroutine(nameof(IESpawn));
+            StartCoroutine(nameof(IESpawn));
+        }
+        
     }
 }

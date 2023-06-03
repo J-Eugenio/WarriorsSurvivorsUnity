@@ -8,6 +8,7 @@ public class Core : MonoBehaviour
     public UpgradesManager upgradeManager;
     [HideInInspector]
     public WaveManager waveManager;
+    public GamePlayHudManager gpHubManager;
 
     private void Awake() {
         if(Instance != null && Instance != this) {
